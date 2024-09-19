@@ -31,11 +31,12 @@ class ResaleShop:
             del self.inventory[id]
             print(f"Computer {id} sold")
         else:
-            print(f"Computer {id} does not exist")
+            print(f"Computer {self.id} does not exist")
    
    # display all computers in stock
     def print_computers(self):
         if self.inventory:
+            print(f"Inventory")
             for item_id in self.inventory:
                 print(f'Computer ID: {item_id}, Description: {self.inventory[item_id].description}, OS: {self.inventory[item_id].os}, Price: {self.inventory[item_id].price}')
         else:
@@ -50,15 +51,22 @@ def main():
     rs:ResaleShop=ResaleShop()
     computer:Computer=Computer("Mac Pro", "M3", 256, 32, "MacOS Sonoma", 2023, 1099)
     comp:Computer=Computer("Mac Air", "M2", 512, 16, "MacOS Monterey", 2022, 1199)    
+    # buy the macbook pro
     rs.buy(computer)
+    # buy the macbook air
     rs.buy(comp)
+    # show all computers in inventory
     rs.print_computers()    
-    rs.sell(computer)
+    # sell the macbook pro
+    rs.sell(1)
+    print("Enter new price: ")
     new_price: int = input()
-    computer.update_price(new_price)
+    comp.price=new_price
+    print("Enter new OS")
     new_os: str=input()
-    computer.update_os(new_os)
-     
+    comp.os=new_os 
+    # show current data about computers in inventory
+    rs.print_computers()
 
 if __name__=="__main__":
     main()
